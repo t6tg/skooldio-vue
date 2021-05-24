@@ -1,6 +1,6 @@
 <template>
     <div>
-        <li v-for="todo in todos" :key="todo.id">
+        <li v-for="todo in sortItem" :key="todo.id">
             <span
                 v-show="todo.id !== 2"
                 :class="{ red: todo.id === 3, green: todo.id === 1 }"
@@ -9,13 +9,42 @@
             >
             <img :src="image" alt="image" width="100" />
         </li>
-        <input type="text" v-model="name" />
+        <input type="button" @click="save2" value="save" />
     </div>
 </template>
 
 <script>
 export default {
     name: 'HelloWorld',
+    watch: {
+        todos(oldVal, newVal) {
+            console.log(oldVal, newVal)
+        }
+    },
+    beforeCreate() {
+        console.log('BeforeCreate')
+    },
+    mounted() {
+        console.log('mouted!!!')
+    },
+    computed: {
+        sortItem() {
+            return this.todos.sort((a, b) => {
+                b.id - a.id
+            })
+        }
+    },
+    updated() {
+        console.log('update!!')
+    },
+    methods: {
+        save() {
+            console.log('save')
+        },
+        save2() {
+            this.save()
+        }
+    },
     filters: {
         capitalize(val) {
             return val.toUpperCase()
@@ -25,7 +54,7 @@ export default {
         return {
             name: '',
             todos: [
-                { id: 1, text: 'james' },
+                { id: 4, text: 'james7' },
                 { id: 2, text: 'james2' },
                 { id: 3, text: 'jame3' }
             ],
