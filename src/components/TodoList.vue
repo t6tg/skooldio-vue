@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li v-for="item in items" :key="item.time">
-            <button @click="done(item.time)">Done</button>{{ item.text }}
+            <button @click="itemDone(item.time)">Done</button>{{ item.text }}
         </li>
     </ul>
 </template>
