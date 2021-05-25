@@ -1,29 +1,23 @@
 <template>
-    <div>
-        <li v-for="todo in todoItems" :key="todo.id">
-            <span>{{ todo.text }}</span>
+    <ul>
+        <li v-for="item in items" :key="item.time">
+            <button @click="done(item.time)">Done</button>{{ item.text }}
         </li>
-    </div>
+    </ul>
 </template>
 
 <script>
 export default {
     name: 'TodoList',
     props: {
-        todoItems: {
+        items: {
             type: Array
         }
     },
-    mounted() {
-        console.log(this.todoItems)
+    methods: {
+        itemDone(id) {
+            this.$emit('onItemDone', id)
+        }
     }
 }
 </script>
-<style scoped >
-.green {
-    color: green;
-}
-.red {
-    color: crimson;
-}
-</style>
